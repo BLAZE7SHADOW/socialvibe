@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { useAuthStore } from '@/store/authStore'
 import { reelService, type Reel } from '@/services/reelService'
@@ -7,6 +8,7 @@ import CreateReelModal from '@/components/reel/CreateReelModal'
 import Button from '@/components/ui/Button'
 
 export default function Reels() {
+  const navigate = useNavigate()
   const { user } = useAuthStore()
   const [reels, setReels] = useState<Reel[]>([])
   const [currentReelIndex, setCurrentReelIndex] = useState(0)
@@ -67,7 +69,7 @@ export default function Reels() {
       setLoading(true)
       const response = await reelService.getReelsFeed(1, 10)
       setReels(response.data.items)
-      setHasMore(response.data.pagination.hasNextPage)
+      setHasMore(response.data.pagination.hasNext)
       setPage(2)
     } catch (error) {
       console.error('Error loading reels:', error)
@@ -81,7 +83,7 @@ export default function Reels() {
       setLoadingMore(true)
       const response = await reelService.getReelsFeed(page, 10)
       setReels(prev => [...prev, ...response.data.items])
-      setHasMore(response.data.pagination.hasNextPage)
+      setHasMore(response.data.pagination.hasNext)
       setPage(prev => prev + 1)
     } catch (error) {
       console.error('Error loading more reels:', error)
@@ -221,7 +223,8 @@ export default function Reels() {
               onLike={handleLikeReel}
               onSave={handleSaveReel}
               onShare={handleShareReel}
-              onComment={handleAddComment}
+              onComment={() => handleAddComment(reel._id, '')}
+              onUserClick={(username) => navigate(`/profile/${username}`)}
               currentUserId={user?._id}
               className="h-full"
             />

@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { 
-  PlayIcon, 
-  PauseIcon, 
+  PlayIcon,
   SpeakerWaveIcon, 
   SpeakerXMarkIcon,
   HeartIcon,

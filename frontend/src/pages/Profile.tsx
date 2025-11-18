@@ -2,12 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { 
   Cog6ToothIcon,
-  UserPlusIcon,
-  UserMinusIcon,
   EllipsisHorizontalIcon,
   ChatBubbleLeftIcon,
-  ShareIcon,
-  HeartIcon,
   PlayIcon,
   PlusIcon,
   CameraIcon,
@@ -27,7 +23,7 @@ import FollowButton from '@/components/user/FollowButton'
 import FollowersModal from '@/components/user/FollowersModal'
 import PostCard from '@/components/post/PostCard'
 import CreatePostModal from '@/components/post/CreatePostModal'
-import { ProfileHeaderSkeleton, PostSkeleton, ReelSkeleton } from '@/components/ui/Skeleton'
+import { ProfileHeaderSkeleton, PostSkeleton } from '@/components/ui/Skeleton'
 import { clsx } from 'clsx'
 
 type TabType = 'posts' | 'reels' | 'saved' | 'tagged'

@@ -22,6 +22,7 @@ import Messages from '@/pages/Messages'
 import Explore from '@/pages/Explore'
 import Settings from '@/pages/Settings'
 import Features from '@/pages/Features'
+import Notifications from '@/pages/Notifications'
 import NotFound from '@/pages/NotFound'
 
 // Protected route component
@@ -236,6 +237,24 @@ function App() {
                     transition={{ duration: 0.3 }}
                   >
                     <Features />
+                  </motion.div>
+                </MainLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoute>
+                <MainLayout>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Notifications />
                   </motion.div>
                 </MainLayout>
               </ProtectedRoute>

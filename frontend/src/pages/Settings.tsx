@@ -9,9 +9,7 @@ import Textarea from '@/components/ui/Textarea'
 import toast from 'react-hot-toast'
 import { 
   UserIcon, 
-  ArrowRightOnRectangleIcon, 
-  ShieldCheckIcon,
-  BellIcon,
+  ArrowRightOnRectangleIcon,
   SunIcon,
   MoonIcon,
   PencilIcon,
@@ -288,85 +286,6 @@ export default function Settings() {
             </div>
           </div>
 
-          {/* Account Settings */}
-          <div className="bg-dark-surface rounded-xl shadow-md p-6 border border-dark-border">
-            <h2 className="text-xl font-semibold text-white mb-6 flex items-center">
-              <ShieldCheckIcon className="w-6 h-6 mr-2" />
-              Privacy & Security
-            </h2>
-            
-            <div className="space-y-4">
-              <div className="flex items-center justify-between py-3 border-b border-dark-border">
-                <div>
-                  <label className="text-gray-300 font-medium">Privacy Settings</label>
-                  <p className="text-gray-400 text-sm">Manage who can see your content</p>
-                </div>
-                <Button variant="ghost" size="sm">
-                  Manage
-                </Button>
-              </div>
-              
-              <div className="flex items-center justify-between py-3 border-b border-dark-border">
-                <div>
-                  <label className="text-gray-300 font-medium">Blocked Users</label>
-                  <p className="text-gray-400 text-sm">View and manage blocked accounts</p>
-                </div>
-                <Button variant="ghost" size="sm">
-                  View List
-                </Button>
-              </div>
-
-              <div className="flex items-center justify-between py-3">
-                <div>
-                  <label className="text-gray-300 font-medium">Account Security</label>
-                  <p className="text-gray-400 text-sm">Change password and security settings</p>
-                </div>
-                <Button variant="ghost" size="sm">
-                  Manage
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Notifications */}
-          <div className="bg-dark-surface rounded-xl shadow-md p-6 border border-dark-border">
-            <h2 className="text-xl font-semibold text-white mb-6 flex items-center">
-              <BellIcon className="w-6 h-6 mr-2" />
-              Notifications
-            </h2>
-            
-            <div className="space-y-4">
-              <div className="flex items-center justify-between py-3 border-b border-dark-border">
-                <div>
-                  <label className="text-gray-300 font-medium">Push Notifications</label>
-                  <p className="text-gray-400 text-sm">Receive notifications on your device</p>
-                </div>
-                <Button variant="ghost" size="sm">
-                  Configure
-                </Button>
-              </div>
-              
-              <div className="flex items-center justify-between py-3 border-b border-dark-border">
-                <div>
-                  <label className="text-gray-300 font-medium">Email Notifications</label>
-                  <p className="text-gray-400 text-sm">Get updates via email</p>
-                </div>
-                <Button variant="ghost" size="sm">
-                  Configure
-                </Button>
-              </div>
-
-              <div className="flex items-center justify-between py-3">
-                <div>
-                  <label className="text-gray-300 font-medium">Activity Notifications</label>
-                  <p className="text-gray-400 text-sm">Notifications for likes, comments, and follows</p>
-                </div>
-                <Button variant="ghost" size="sm">
-                  Configure
-                </Button>
-              </div>
-            </div>
-          </div>
 
           {/* Logout Section */}
           <div className="bg-dark-surface rounded-xl shadow-md p-6 border border-dark-border">

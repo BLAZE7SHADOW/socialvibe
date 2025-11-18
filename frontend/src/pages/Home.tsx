@@ -77,7 +77,7 @@ const Home: React.FC = () => {
       const postsResponse = await postService.getFeedPosts(1, 10)
       
       setPosts(postsResponse.data.items)
-      setHasMore(postsResponse.data.pagination.hasNextPage)
+      setHasMore(postsResponse.data.pagination.hasNext)
       setPage(2)
     } catch (error) {
       console.error('Error loading feed:', error)
@@ -91,7 +91,7 @@ const Home: React.FC = () => {
       setLoadingMore(true)
       const response = await postService.getFeedPosts(page, 10)
       setPosts(prev => [...prev, ...response.data.items])
-      setHasMore(response.data.pagination.hasNextPage)
+      setHasMore(response.data.pagination.hasNext)
       setPage(prev => prev + 1)
     } catch (error) {
       console.error('Error loading more posts:', error)
@@ -141,16 +141,17 @@ const Home: React.FC = () => {
 
   const handleAddComment = async (postId: string, text: string) => {
     try {
-      const { comment, commentsCount } = await postService.addComment(postId, text)
+      const result = await postService.addComment(postId, text)
       setPosts(prev => prev.map(post => 
         post._id === postId 
           ? { 
               ...post, 
-              comments: [...post.comments, comment],
-              stats: { ...post.stats, commentsCount }
+              comments: [...post.comments, result.comment],
+              stats: { ...post.stats, commentsCount: result.commentsCount }
             }
           : post
       ))
+      return result
     } catch (error) {
       console.error('Error adding comment:', error)
       throw error
@@ -230,7 +231,7 @@ const Home: React.FC = () => {
             key={post._id}
             post={post}
             onLike={handleLikePost}
-            onComment={handleAddComment}
+            onComment={(postId, text) => handleAddComment(postId, text)}
             currentUserId={user?._id}
           />
         ))}

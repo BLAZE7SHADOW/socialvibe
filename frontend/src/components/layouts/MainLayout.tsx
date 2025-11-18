@@ -18,7 +18,6 @@ import {
   UserIcon as UserIconSolid,
   Cog6ToothIcon as Cog6ToothIconSolid,
   PlayIcon as PlayIconSolid,
-  BellIcon as BellIconSolid,
   InformationCircleIcon as InformationCircleIconSolid
 } from '@heroicons/react/24/solid'
 import { useAuthStore } from '@/store/authStore'
@@ -35,7 +34,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const navigate = useNavigate()
   const { user, logout } = useAuthStore()
   const [unreadCount, setUnreadCount] = useState(0)
-  const [showNotifications, setShowNotifications] = useState(false)
 
   // Initialize socket connection for authenticated users
   useEffect(() => {
@@ -164,9 +162,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             {user && (
               <>
                 <li className="mt-4">
-                  <button
-                    onClick={() => setShowNotifications(!showNotifications)}
-                    className="nav-item relative w-full"
+                  <Link
+                    to="/notifications"
+                    className={`nav-item relative ${isActive('/notifications') ? 'active' : ''}`}
                   >
                     <BellIcon className="h-6 w-6 mr-3" />
                     <span className="text-sm font-medium">Notifications</span>
@@ -175,7 +173,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                         {unreadCount > 9 ? '9+' : unreadCount}
                       </span>
                     )}
-                  </button>
+                  </Link>
                 </li>
                 
                 {/* Logout button for desktop */}
@@ -203,8 +201,8 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           {/* Mobile header buttons */}
           {user && (
             <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
+              <Link
+                to="/notifications"
                 className="relative p-2 text-gray-400 hover:text-white transition-colors"
               >
                 <BellIcon className="w-6 h-6" />
@@ -213,7 +211,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                     {unreadCount > 9 ? '9+' : unreadCount}
                   </span>
                 )}
-              </button>
+              </Link>
               
               <button
                 onClick={handleLogout}
@@ -256,38 +254,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         </div>
       </nav>
 
-      {/* Notifications Dropdown */}
-      {showNotifications && user && (
-        <>
-          <div 
-            className="fixed inset-0 z-40" 
-            onClick={() => setShowNotifications(false)}
-          />
-          <div className="fixed top-16 right-4 lg:top-20 lg:right-8 z-50 w-80 max-h-96 bg-dark-surface rounded-lg shadow-lg border border-dark-border overflow-hidden">
-            <div className="p-4 border-b border-dark-border">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white">Notifications</h3>
-                <button
-                  onClick={async () => {
-                    await notificationService.markAllAsRead()
-                    setUnreadCount(0)
-                  }}
-                  className="text-sm text-primary-400 hover:text-primary-300"
-                >
-                  Mark all read
-                </button>
-              </div>
-            </div>
-            <div className="overflow-y-auto max-h-80">
-              <div className="p-4 text-center text-gray-400">
-                <BellIcon className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                <p>No notifications yet</p>
-                <p className="text-sm">When you get notifications, they'll appear here</p>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
 
       {/* Real-time notifications for authenticated users */}
       {user && <NotificationsManager />}

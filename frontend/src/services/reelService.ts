@@ -1,4 +1,4 @@
-import api, { createFormData } from './api'
+import api from './api'
 import type { ApiResponse, PaginatedResponse } from '@/types/api'
 
 export interface ReelAuthor {
